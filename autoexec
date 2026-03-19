@@ -1,0 +1,333 @@
+// __________________________________________________________________________________________________________________________________________________________________________
+//
+// autoexec.cfg - a text file containing custom console commands
+// and settings that automatically execute when launching Valve games
+// such as Team Fortress 2. It ensures personalized settings - such as 
+// custom keybinds, crosshairs, mouse sensitivity - are applied immediately,
+// providing a consistent experience and preventing settings from resetting. 
+//
+// It's crucial for maintaining consistent settings when playing on 
+// different computers or after updates because it automates setting up 
+// custom configurations (e.g. custom keybinds and graphic settings) 
+// without manual entry every session.
+// 
+// This is my autoexec file which includes different sections with a small
+// description following each section.
+//
+// __________________________________________________________________________________________________________________________________________________________________________
+
+
+
+
+
+
+
+
+
+
+
+// __________________________________________________________________________________________________________________________________________________________________________
+//
+// Default keybinds - a list of all default keybinds that are present
+// when you first launch your game. Includes some changes that suit my preferences.
+//
+// __________________________________________________________________________________________________________________________________________________________________________
+
+unbindall
+
+bind "`"			"toggleconsole"
+bind "w"			"+forward"
+bind "s"			"+back"
+bind "a"			"+moveleft"
+bind "d"			"+moveright"
+bind "SPACE"			"+jump"
+bind "SHIFT"			"+duck"
+bind "TAB"			"+showscores"
+bind "'"			"+moveup"
+bind "/"			"+movedown"
+bind "PGUP"			"+lookup"
+bind "PGDN"			"+lookdown"
+bind "END"			"centerview"
+bind "ALT"			"+strafe"
+bind "INS"			"+klook"
+bind "r"			"+reload"
+bind "MOUSE1"			"+attack"
+bind "MOUSE2"			"+attack2"
+bind "MOUSE3"			"+attack3"
+bind "z"			"voice_menu_1"
+bind "x"			"voice_menu_2"
+bind "c"			"voice_menu_3"
+bind "e"			"dropitem"
+bind "1"			"slot1"
+bind "2"			"slot2"
+bind "3"			"slot3"
+bind "4"			"slot4"
+bind "5"			"slot5"
+bind "6"			"slot6"
+bind "7"			"slot7""
+bind "8"			"slot8"
+bind "9"			"slot9"
+bind "0"			"slot10"
+bind "q"			"lastinv"
+bind "F2"			"show_quest_log"
+bind "F5"			"screenshot"
+bind "F6"			"save_replay"
+bind "F7"			"abuse_report_queue"
+bind "F10"			"quit prompt"
+bind "F12"			"replay_togglereplaytips"
+bind "PAUSE"			"pause"
+bind "ESCAPE"			"escape"
+bind "t"			"impulse 201"
+bind "y"			"say"
+bind "u"			"say_team"
+bind "p"			"say_party"
+bind "v"			"+voicerecord"
+bind "."			"changeteam"
+bind ","			"changeclass"
+bind "F1"			"+showroundinfo"
+bind "g"			"+taunt"
+bind "h"			"+use_action_slot_item"
+bind "e"			"voicemenu 0 0"
+bind "b"			"lastdisguise"
+bind "l"			"dropitem"
+bind "i"			"showmapinfo"
+bind "-"			"disguiseteam"
+bind "m"			"open_charinfo_direct"
+bind "n"			"open_charinfo_backpack"
+bind "f"			"+inspect"
+bind "j"			"cl_trigger_first_notification"
+bind "k"			"cl_decline_first_notification"
+
+// __________________________________________________________________________________________________________________________________________________________________________
+//
+// Null-cancelling movement script - a script that prevents you from 
+// pressing two opposing directions which makes your character to stop moving, 
+// making you an easier to hit target.
+//
+// __________________________________________________________________________________________________________________________________________________________________________
+
+bind w +mfwd
+bind s +mback
+bind a +mleft
+bind d +mright
+
+alias +mfwd "-back;+forward;alias checkfwd +forward"
+alias +mback "-forward;+back;alias checkback +back"
+alias +mleft "-moveright;+moveleft;alias checkleft +moveleft"
+alias +mright "-moveleft;+moveright;alias checkright +moveright"
+
+alias -mfwd "-forward;checkback;alias checkfwd none"
+alias -mback "-back;checkfwd;alias checkback none"
+alias -mleft "-moveleft;checkright;alias checkleft none"
+alias -mright "-moveright;checkleft;alias checkright none"
+
+alias checkfwd none
+alias checkback none
+alias checkleft none
+alias checkright none
+alias none ""
+
+// __________________________________________________________________________________________________________________________________________________________________________
+//
+// Jump on scroll wheel or "bhop" script - a script that makes you jump
+// whenever you scroll your mouse wheel up or down. This way, it's easier 
+// to "bunnyhop" around on maps.
+//
+// __________________________________________________________________________________________________________________________________________________________________________
+
+bind "MWHEELUP"			"+jump"
+bind "MWHEELDOWN"		"+jump"
+
+// __________________________________________________________________________________________________________________________________________________________________________
+//
+// Scoreboard and Net Graph toggle script - a script that allows you to 
+// look at your FPS and network stats without cluttering up
+// your screen.
+//
+// __________________________________________________________________________________________________________________________________________________________________________
+
+alias "+scoresnet" "+showscores; net_graph 1"
+alias "-scoresnet" "-showscores; net_graph 0"
+
+bind "TAB" "+scoresnet"
+
+// __________________________________________________________________________________________________________________________________________________________________________
+//
+// Sound settings - a list of commands, all of which
+// lower sound quality which makes determination of 
+// directionality and distance much easier (as said by Christopher Down)
+// without a great deal of performance improvement.
+//
+// __________________________________________________________________________________________________________________________________________________________________________
+
+dsp_enhance_stereo 0
+dsp_slow_cpu 1
+snd_async_fullyasync 1
+snd_pitchquality 0
+snd_spatialize_roundrobin 1
+
+// __________________________________________________________________________________________________________________________________________________________________________
+//
+// Miscellaneous settings - a list of commands with their explanation
+// stated right next to them, according to Christopher Down.
+//
+// __________________________________________________________________________________________________________________________________________________________________________
+
+in_usekeyboardsampletime 0
+mat_clipz 1
+mat_forcehardwaresync 0
+mat_levelflush 1
+m_rawinput 1              // Turn on raw mouse input.
+m_customaccel 0           // Turns off mouse acceleration.
+mat_vsync 0               // Turns off vsync to avoid nasty I/O latency.
+r_fastzreject -1          // Values >1 enable a fast Z rejection algorithm, to be
+                          // performed on the GPU (as opposed to on the CPU). The
+                          // value '-1' autodetects hardware support for this
+                          // feature, which is safer than forcing it.
+
+cl_forcepreload 1         // Forces preloading.
+cl_threaded_bone_setup 0
+cl_threaded_client_leaf_system 0
+r_queued_decals 0
+r_queued_ropes 1
+r_queued_post_processing 0
+r_threaded_client_shadow_manager 1
+r_threaded_particles 1
+r_threaded_renderables 1
+mat_queue_mode 2
+
+// __________________________________________________________________________________________________________________________________________________________________________
+//
+// Disabling Shadows, Sprays, Decals, Ragdolls, Gibs and Facial Features commands - a list of commands 
+// that disable all of the above graphical effects, which results in a
+// smoother and minimal gameplay experience.
+//
+// __________________________________________________________________________________________________________________________________________________________________________
+
+cl_phys_props_enable 0    // This part disables Gibs.
+cl_phys_props_max 0
+props_break_max_pieces 0
+r_propsmaxdist 1
+violence_agibs 0
+violence_hgibs 0
+
+cl_ragdoll_fade_time 0    // This part disables Ragdolls.
+cl_ragdoll_forcefade 1
+cl_ragdoll_physics_enable 0
+g_ragdoll_fadespeed 10000
+g_ragdoll_lvfadespeed 10000
+ragdoll_sleepaftertime 0
+
+r_eyes 0                 // This part disables Facial Features.
+r_flex 0
+r_lod 2
+r_rootlod 2
+r_teeth 0
+
+mat_shadowstate 1        // Non-blobby shadows. Sometimes used
+r_shadowmaxrendered 11   // by competitive TF2 players to see opponents standing 
+r_shadows 1              // near the other side of a wall.
+r_shadowrendertotexture 1
+
+cl_playerspraydisable 1  // This part disables sprays.
+r_spray_lifetime 0
+
+r_decals 0               // This part disables decals.
+mp_decals 0
+r_drawtracers_firstperson 0
+
+// __________________________________________________________________________________________________________________________________________________________________________
+//
+// The "DirectX 8" look (e.g. "rusty" australiums, matte Ubercharge
+// and ultra-minimalist visual style) - Valve officially removed DirectX 8 
+// support from TF2 in the April 2024 64-bit update. You can no longer just put
+// -dxlevel 81 in your launch options to force the gme into that retro, ultra-low-spec mode.
+// 
+// Though, it is possible to perfectly replicate that flat, non-shiny, rusty look in 
+// modern DirectX 9/Vulkan client using specific console commands, and strip the
+// rest of the graphics using a modern config (mastercomfig).
+// 
+// Add these exact settings for maximum minimalism.
+//
+// Plus, the "Always Clean" Movement bind for a constantly clean map.
+//
+// __________________________________________________________________________________________________________________________________________________________________________
+
+mat_phong 0                // These two settings, remove the "plastic shine"
+r_rimlight 0              // and backlighting from player models and weapons.
+mat_specular 0            // Disables environmental reflections.
+mat_bumpmap 0             // Flattens out textures, removing the 3D depth on surfaces.
+mat_picmip 2              // Lowest possible picmip value allowed by Valve servers.
+
+bind "MOUSE1" "+attack; r_cleardecals"
+
+// __________________________________________________________________________________________________________________________________________________________________________
+//
+// The Competitive Part - these settings are designed to get that
+// absolute peak competitive edge. Follow them as stated down below.
+//
+// __________________________________________________________________________________________________________________________________________________________________________
+
+mat_monitorgamma 1.6     // 1.6 is the absolute brightest setting allowed.
+mat_colorcorrection 0    // Removes map-specific color filters.
+
+// mat_filtertextures 0
+// mat_filterlight maps 0
+
+rate 1048576           // Maxes out your bandwidth so no data is choked.
+cl_cmdrate 66          // Sends updates to the server 66 times a second.
+cl_updaterate 66       // Receives updates from the server 66 times a second.
+cl_interp_ratio 1      // Set to 2 if you play on Wi-Fi or have packet loss.
+cl_interp 0.01515      // Pushes your hitboxes as close to the models as possible.
+                       // Note that if you primarily play hitscan classes like Scout or
+                       // Sniper, changing the value to '0.030303' is preferred.
+cl_smooth 0            // Disables artificial smoothing so player movement is exact.
+cl_smoothtime 0.01
+
+cl_showhelp 0
+cl_ask_blacklist_opt_out 1
+cl_ask_favorite_opt_out 1
+
+sb_dontshow_maxplayer_warning 1
+
+tf_explanations_backpackpanel 1
+tf_explanations_charinfo_armory_panel 1
+tf_explanations_charinfopanel 1
+tf_explanations_craftingpanel 1
+tf_explanations_discardpanel 1
+tf_explanations_store 1
+tf_training_has_prompted_for_forums 1
+tf_training_has_prompted_for_loadout 1
+tf_training_has_prompted_for_offline_practice 1
+tf_training_has_prompted_for_options 1
+
+// __________________________________________________________________________________________________________________________________________________________________________
+//
+// Hitsound and Killsound Settings - best possible settings
+// for pitch and volume.
+//
+// __________________________________________________________________________________________________________________________________________________________________________
+
+tf_dingalingaling 1
+tf_dingaling_pitchmindmg 133   // High pitch for low damage.
+tf_dingaling_pitchmaxdmg 50    // Deep pitch for high damage.
+tf_dingaling_volume 1
+
+tf_dingalingaling_lasthit 1
+tf_dingaling_lasthit_pitchmindmg 100
+tf_dingaling_lasthit_pitchmaxdmg 100
+tf_dingaling_lasthit_volume 1
+
+// __________________________________________________________________________________________________________________________________________________________________________
+//
+// Viewmodel Toggle Script - a simple script that switches
+// between viewmodel on and off with minimized viewmodel.
+//
+// __________________________________________________________________________________________________________________________________________________________________________
+
+alias "vm_off" "r_drawviewmodel 0; viewmodel_fov 0; tf_use_min_viewmodels 1; alias vm_toggle vm_on"
+alias "vm_on" "r_drawviewmodel 1; viewmodel_fov 70; tf_use_min_viewmodels 1; alias vm_toggle vm_off"
+
+alias "vm_toggle" "vm_off" 
+
+bind "t" "vm_toggle"
