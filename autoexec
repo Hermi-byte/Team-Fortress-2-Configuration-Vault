@@ -160,35 +160,34 @@ bind "TAB" "+scoresnet"
 //
 // __________________________________________________________________________________________________________________________________________________________________________
 
-snd_async_fullyasync 1    	// Play sounds independently of main engine work.
-snd_async_minsize 0       	// Fast async check when snd_async_fullyasync is enabled.
+snd_async_fullyasync 1    	    // Play sounds independently of main engine work.
+snd_async_minsize 0       	    // Fast async check when snd_async_fullyasync is enabled.
 snd_mix_async 1 	        	// Use another thread to mix sounds.
 phonemedelay 0 			        // Do not delay lip sync a lot with an async sound system.
-snd_musicvolume 0           // Disables music volume.
-snd_delay_sound_shift 0.01 	// Give some time to allow for better synced sounds by providing a
-								            // bit of extra room on the sound processing time calculations.
+snd_musicvolume 0               // Disables music volume.
+snd_delay_sound_shift 0.01   	// Give some time to allow for better synced sounds by providing a
+								// bit of extra room on the sound processing time calculations.
 snd_mixahead 0.066 
-snd_pitchquality 0 				  // Use linear mixer for sound, performance benefit.
+snd_pitchquality 0 		        // Use linear mixer for sound, performance benefit.
 snd_disable_mixer_duck 0 		// Enable mixing sounds to adjust volume.
 snd_surround_speakers -1 		// Autodetect speaker configuration from OS.
 windows_speaker_config 4 		// Windows speaker configuration.
 
-snd_spatialize_roundrobin 1 // Spatialize sounds every 2 frames, less performance benefit.						
-dsp_enhance_stereo 0 	      // Disable extra spatial DSP effects and delays.
+snd_spatialize_roundrobin 1     // Spatialize sounds every 2 frames, less performance benefit.						
+dsp_enhance_stereo 0 	        // Disable extra spatial DSP effects and delays.
 dsp_slow_cpu 1 			        // Disable initialization of enhanced spatialization.
 dsp_room 0 		            	// Disable automatic DSP.
 dsp_facingaway 0 		        // Disable the facing away DSP effect.
 dsp_speaker 50 
 dsp_water 0 	          		// Disable water muffling effect.
 snd_lockpartial 1 	    		// Use interleaved, partial locking sound algorithm.
-snd_cull_duplicates 0 	  	// Do not skip playing duplicate sounds.
-				                		// 1 = Only play one of each sound at a time.
+snd_cull_duplicates 0 	     	// Do not skip playing duplicate sounds.
 voice_steal 2 			       	// Reuse unimportant sound channels, increases FPS and sound quality.
 voice_buffer_ms 200 	    	// Buffer voice stream for better quality, at a slight delay.
 snd_noextraupdate 1 	    	// Do not update sound twice.
 snd_defer_trace 1 	     		// Defer DSP spatialization with tracing to the next frame.
 dsp_enhance_stereo 0
-snd_async_spew_blocking 0   // Disable async spew.
+snd_async_spew_blocking 0       // Disable async spew.
 
 // __________________________________________________________________________________________________________________________________________________________________________
 //
@@ -293,83 +292,25 @@ bind "MOUSE1" "+attack; r_cleardecals"
 //
 // __________________________________________________________________________________________________________________________________________________________________________
 
-// ----------------------------------------------------------------------------
-// LOD (Level of Detail)
-// ----------------------------------------------------------------------------
-
-r_lod -1			// Use r_rootlod to properly fade through LODs
-						// r_lod 0 will always use the highest LOD possible
-r_rootlod 2			// Maximum performance for models. 
-		//1 		// Better model quality with little loss in FPS
-		//0 		// Max Quality, likely to decrease FPS
-						
-lod_transitiondist -1 		// Do not fade in map objects for maximum performance
-				//-5000 	// Fade map objects over a long distance to reduce
-								// pop in and clutter while still increasing performance
-				//-5001 	// Fade map objects across a shorter distance to
-								// slightly reduce pop in while still increasing performance
-				//800		// Start fading map objects only when they are very far away, 
-								// decreases performance but has the least pop in
-							
-mat_max_worldmesh_vertices 65536 	// Use maximum mesh vertices to reduce mesh count
-						// 1024		// Reduce invididual mesh complexity for weak GPUs 
-										// Intergrated GPU users would probably benefit from
-										// this setting at 1024.
-
-// ----------------------------------------------------------------------------
-// Lighting
-// ----------------------------------------------------------------------------	
-
-r_ambientboost 0 	// Disable to save the small amount of CPU this uses	
-			// 1 	// Boost reflected light, may help seeing in dark areas
-						// AFAIK this only affects DX 9.  0/1 has no visual difference in DX 8
-r_ambientmin 0 		// Disables ambient boost at all light levels even if turned on
-		//   0.5 	// Allow for ambient boost even in brighter light levels, makes characters stand out 
-		//   0.3 	// TF2 default
-		//   0.1 	// Ambient boost less often, realistic darkness
-		//   1.1 	// Ambient boost every time		
-
-r_rimlight 0 		// Disable light around character edges, very small FPS increase, 
-						//rimlight uses GPU only			
-		// 1		// for better visibility of classes
-						// This value has no/negligible visual difference in DX 8
-mat_phong 0			// Disable phong for flatter shading			
-		// 1		// Use a phong shader for shading/reflection
-						// This value has no/negligible visual difference in DX 8
-
-r_dynamic 0 		// Disable dynamic lighting (muzzle flash lighting, explosions 
-						// and other lighted effects)
-r_maxdlights 0 		// Do not allow any dynamic lights	
-			// 9 	// Mild Reduction in max dynamic lights
-			// 32 	// Max number of dynamic lights
-
-muzzleflash_light 0 			// Disable muzzle flash lights
-				//1 			// Enable muzzle flash lights			
-cl_muzzleflash_dlight_1st 0  	// Disable muzzle flash lights in first person
-
-r_worldlights 0 			// Disable world lights
-			// 2			// Reduce maximum lights applied to a vertex
-			// 4			// Use the maximum amount of world lights
-r_worldlightmin 0.1			// Reject a lot of minor world lighting 
-				// 10 		// Reject all world lighting
-				// 0.004	// Do not render insignificant world lighting 
-				// 0.0002 	// Render practically all world lighting
-
-r_lightaverage 0 	// Disable lighting job that uses a lot of CPU even if it's not needed/noticeable
-			// 1 	// Enable time averaging of lighting to reduce popping				
-mat_disable_lightwarp 1 	// Disable light warps	
-mat_filterlightmaps 1 		// Filter lightmaps. Some users may prefer the blocky
-								// look of 0. Negligible FPS difference on or off
-mat_reducefillrate 0		// Shouldn't make a difference in DX8, looks better in DX9 
-								// and uses less CPU resources
-				// 1 		// Simplify material shading and use some DX8 features.
+r_lod -1
+r_rootlod 2
+lod_transitiondist -1 
+mat_max_worldmesh_vertices 65536 	
+r_ambientboost 0 
+r_ambientmin 0.5
+r_rimlight 1 
+mat_phong 0	
+r_dynamic 0 
+r_maxdlights 0 	
+muzzleflash_light 0 
+cl_muzzleflash_dlight_1st 0
+r_worldlights 0 	
+r_worldlightmin 0.1		
+r_lightaverage 0 
+mat_disable_lightwarp 1
+mat_filterlightmaps 1 	
+mat_reducefillrate 0
 mat_softwarelighting 0
-
-// ----------------------------------------------------------------------------
-// Effects
-// ----------------------------------------------------------------------------
-// Controls weapon and other miscellaneous effects								
-// ----------------------------------------------------------------------------
 
 tracer_extra 0 					// Remove extra fluff to bullet lines that make them thicker
 			// 1 				// Make bullet lines more visible, low performance impact
@@ -483,16 +424,7 @@ pyro_vignette 0 				// Disable vignette for pyrovision
 								// If for some reason you enable pyrovision vignette 
 									// these are some additional options.
 
-// ----------------------------------------------------------------------------
-// Motion Blur
-// ----------------------------------------------------------------------------
-// These settings will adjust the blurring effect from rotation and movement
-// I did not add  all the motion blur settings to this because TF2 motion blur 
-// is amongst the worst I've seen. If you use Transparent Viewmodels go to
-// autoexec.cfg and uncomment the line that has "TransparentViewmodels.cfg"
-// ----------------------------------------------------------------------------
-
-mat_motion_blur_enabled 0 			// Disable motion blur
+mat_motion_blur_enabled 0 
 mat_motion_blur_forward_enabled 0
 mat_motion_blur_strength 0
 
@@ -603,44 +535,15 @@ phonemesnap 0 			// Do not crossfade a second lip sync on any LOD
 mp_usehwmmodels -1		// Do not use or load high quality characters
 mp_usehwmvcds   -1		// Do not use or load high quality character facial expressions
 
-// ----------------------------------------------------------------------------
-// Decals
-// ----------------------------------------------------------------------------
-// Overlay textures on models
-// ----------------------------------------------------------------------------
-// General
-// -------------
-// Bullet holes and overall decal support
-// -------------
-
-r_decals 9 			// Allow to check bullet spread (must be the same as mp_decals)
-	//   0 			// Disable decals
-	//   96 		// Optimized high decal count
-	//   2048 		// Maximum decal count
-mp_decals 9 		// Allow to check bullet spread (must be the same as r_decals)
-		//0 		// Disable decals
-		//96 		// Optimized high decal count
-		//2048 		// Maximum decal count
-		
-r_drawbatchdecals 0 		// not necessary for 9 decals
-				//1 		// use this if using a lot of decals
-r_decal_cullsize 256 		// Hide decals unless they are relatively big
-			//   20 		// Optimized decal cullsize if you want to still see decals from far away
-r_decal_cover_count 1 		// Remove decal when there is 1 decal in its place/close to covering it
-				//  4 		// Allow for more decals covering each other				
-r_decal_overlap_area 0.4 	// Remove decal when there is another decal barely covering it
-				//   0.8 	// Allow for decals to overlap each other more				
-r_decal_overlap_count 0 	// Do not allow decals to overlap each other
-					//3 	// Allow for 3 decals to overlap each other
-
-// ------------------
-// Model Decals
-// ------------------
-
-r_drawmodeldecals 1 	// Enable model decals prevents some bugs, with negligible performance hit.
-				//0 	// Disable blood decals on bodies. Prevents new objects to be created that decals 
-							// apply onto. Also causes a bug with red bullet decals on wood models
-r_maxmodeldecal 9 		// Optimize maximum model decal count		
+r_decals 0 
+mp_decals 0 
+r_drawbatchdecals 0 
+r_decal_cullsize 256 
+r_decal_cover_count 1 			
+r_decal_overlap_area 0.4 		
+r_decal_overlap_count 0
+r_drawmodeldecals 1
+r_maxmodeldecal 9 
 
 // ----------------
 // Map Decals
@@ -653,45 +556,6 @@ r_overlayfademax 2000
 r_overlayfademin 1750
 // above commands are left in incase someone enables the overlayfragment
 			
-// ----------------------------------------------------------------------------
-// Ragdolls
-// ----------------------------------------------------------------------------
-// You will have reduced performance on deaths which produce ragdolls.
-// ----------------------------------------------------------------------------
-
-cl_ragdoll_fade_time 0
-				//   -3 		// Remove ragdoll fade out delay
-				//   15 		// Fade out ragdolls in 5 seconds				
-cl_ragdoll_forcefade 1 			// Effectively disables ragdolls by instantly fading them
-				//   0 			// Enable ragdolls				
-cl_ragdoll_physics_enable 0		// Disables ragdoll physics
-					//    1 	// Enable ragdolls physics for meaningful ragdolls
-ragdoll_sleepaftertime 0 		// Instantly sleep ragdolls
-					// 1		// Wait a reasonable time before sleeping ragdoll physics
-
-// ----------------------------------------------------------------------------
-// Gibs
-// ----------------------------------------------------------------------------
-// You will have reduced performance on deaths which produce gibs if enabled
-// ----------------------------------------------------------------------------
-
-props_break_max_pieces 0 	// Disables gibs
-					// -1 	// Breaks gibs and some props into pieces they were designed to break into
-					// 2 	// Break into a max of 2 pieces			
-					
-violence_agibs 1 	// Low violence lowers FPS. Disabling removes blood effects.
-violence_hgibs 1 	// Low violence lowers FPS. Disabling removes blood effects.
-violence_ablood 1 	// framerates on -most- pcs are higher with these on
-violence_hblood 1
-
-cl_burninggibs 0	// Disables burning gibs
-			// 1	// Enables burning gibs
-			
-// ----------------------------------------------------------------------------
-// Props 
-// ----------------------------------------------------------------------------
-// Various small objects
-// ----------------------------------------------------------------------------
 
 r_PhysPropStaticLighting 1 		// Use premade lighting for props, increases FPS
 r_decalstaticprops 0 			// Do not use some lighting data for static props, disable decals on static props
@@ -817,80 +681,33 @@ sv_alternateticks 0 	// Run every tick
 				
 mod_offline_hdr_switch 1
 
-// ----------------------------------------------------------------------------
-// OpenGL
-// ----------------------------------------------------------------------------
-// Optimizations for OpenGL platforms (Linux and macOS)
-// ----------------------------------------------------------------------------
-
-//mat_texture_reload_frame_swap_workaround 1 	// Work around texture data being unnecessarily 
-													// stored on some drivers by doing frame swaps
+mat_texture_reload_frame_swap_workaround 1
 													
-gl_pow2_tempmem 1 					// Makes memory allocation behavior more stable
-gl_mtglflush_at_tof 1 				// Makes frames output smoother, at slightly less FPS
-gl_debug_output 0 					// Disable debug messages
-gl_magnify_resolve_mode 1 			// Use fastest resolve mode when up scaling too
-gl_paircache_rows_lg2 11 			// Increase shader pair cache size
-gl_paircache_ways_lg2 5 			// Keep some loops small by using minimum ways size
-//gl_can_resolve_flipped 1 			// Enable page flipping without checking hardware support
-//gl_amd_occlusion_workaround 0 	// Disable AMD occlusion workaround
+gl_pow2_tempmem 1 	
+gl_mtglflush_at_tof 1 		
+gl_debug_output 0 			
+gl_magnify_resolve_mode 1 		
+gl_paircache_rows_lg2 11 		
+gl_paircache_ways_lg2 5 			
+gl_can_resolve_flipped 1 			
+gl_amd_occlusion_workaround 0 	
 
-// ----------------------------------------------------------------------------
-// Netgraph
-// ----------------------------------------------------------------------------
-// Advanced HUD display of network info and FPS
-// ----------------------------------------------------------------------------
+net_graphpos 1 
+net_graphheight 64 	
+net_graphproportionalfont 1
+net_scale 5 		
+net_graphsolid 0 	
+net_graphsolid 1 	
+net_graphtext 1 	
+net_graphmsecs 400 	
+net_graphshowlatency 1 	
+net_graphshowinterp 1 
 
-//net_graph 0 	// netgraph display
-				// 0 = no graph, 
-				// 1 = text only, 
-				// 2 = graph, 
-				// 3 = legend + choke/loss, 
-				// 4 = server perf stats
-			  
-//net_graphpos 1 	// the horizontal position of the netgraph
-					// 0 = left, 
-					// 1 = right, 
-					// 2 = middle
-					// anything else will set the x coordinate of the graph's left edge
-				
-//net_graphheight 64 			// height of the text part of the graph
-//net_graphproportionalfont 1 	// scale fonts as the screen resolution goes up
-//net_scale 5 					// the height of the graph portion
-net_graphsolid 0 				// draw height ticks as single ticks (small optimization)
-//net_graphsolid 1 				// Revert back to the Half-Life 1 behavior of drawing a full rectangle
-//net_graphtext 1 				// draw text fields
-//net_graphmsecs 400 			// over how many milliseconds should the text area measure
-//net_graphshowlatency 1 		// show the latency part of the graph
-//net_graphshowinterp 1 		// show the interpolation part of the graph
+con_nprint_bgalpha 100 
+con_nprint_bgborder 1 	
 
-// ----------------------------------------------------------------------------
-// Console
-// ----------------------------------------------------------------------------
-// Developer console customization
-// ----------------------------------------------------------------------------
-
-con_nprint_bgalpha 100 		// Console translucency (0 to 255) for special debug messages
-				// 255 		// Disable transparency for lowend computers
-con_nprint_bgborder 1 		// Console border for special debug messages
-				//  0 		// Disable border on lowend computers
-
-// ----------------------------------------------------------------------------
-// Misc
-// ----------------------------------------------------------------------------
-// Settings that do not fit into a category
-// ----------------------------------------------------------------------------
-
-bugreporter_uploadasync 1 	// Upload bug reporter attachments asynchronously
-ai_frametime_limit 0.0152 	// Use simpler NPC AI if the frametime is too low, 
-								// useful for Source singleplayer and mods
-				// 50 		// Do not use simpler AI
-
-// ----------------------------------------------------------------------------
-// Memory
-// ----------------------------------------------------------------------------
-// Adjustments to memory allocation
-// ----------------------------------------------------------------------------
+bugreporter_uploadasync 1
+ai_frametime_limit 0.0152 
 
 mem_max_heapsize_dedicated 128 	// Increase memory cap on 512MB systems
 
